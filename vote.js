@@ -1,12 +1,16 @@
 /* global Vue, vm, firebase */
 
+const roomId = new URLSearchParams(location.search).get('roomId') || 'default'
+const roomRef = firebase.database().ref('vote/rooms').child(roomId)
+
 vm = new Vue({
   el: "#app",
   data: {
     currentUser: null,
     table: {},
     submitting: false,
-    userProfiles: {}
+    userProfiles: {},
+    admins: {},
   },
   methods: {
     getName(userId) {
@@ -31,13 +35,13 @@ vm = new Vue({
       if (!loginResult) {
         return;
       }
-      firebase
-        .database()
-        .ref("vote/entries")
+      roomRef.child('entries')
         .child(entryId)
         .child('votes')
         .child(loginResult.user.uid)
-        .set(vote);
+        .transaction(x => {
+          return x === vote ? null : vote
+        });
     },
     getUserState(entryId, criterion) {
       return (this.table[entryId].votes || {})[this.currentUser] === criterion
@@ -48,12 +52,35 @@ vm = new Vue({
       return (this.table[entryId].user) === this.currentUser
     },
     isAdmin() {
-      return !!this.admins[this.currentUser]
+      return this.admins && !!this.admins[this.currentUser]
     },
     voteCount(entryId, criterion) {
       return Object.values(this.table[entryId].votes || {}).filter(
         v => v === criterion
       ).length;
+    },
+    voteNames(entryId, criterion) {
+      return Object.entries(this.table[entryId].votes || {}).filter(
+        ([k, v]) => v === criterion
+      ).map(([k,v])=>this.getName(k));
+    },
+    edit(entryId) {
+      const text = prompt("Your proposal", this.table[entryId].detail);
+      const textRef = roomRef.child('entries')
+        .child(entryId)
+        .child('detail')
+      if (!text) {
+        return;
+      }
+      textRef.set(text);
+    },
+    toggleRetract(entryId) {
+      let entryRef = roomRef.child('entries')
+        .child(entryId)
+        .child('retracted')
+      
+      let isRetracted = entryRef.get() || false    
+      entryRef.set(!isRetracted)
     },
     async submit() {
       this.submitting = true;
@@ -67,9 +94,7 @@ vm = new Vue({
         if (!text) {
           return;
         }
-        firebase
-          .database()
-          .ref("vote/entries")
+        roomRef.child('entries')
           .push({
             added: new Date().toJSON(),
             user: user.uid,
@@ -121,11 +146,14 @@ async function login() {
   return { user, name }
 }
 
-firebase
-  .database()
-  .ref("vote/entries")
+roomRef.child('entries')
   .on("value", snapshot => {
     vm.table = snapshot.val();
+  });
+
+roomRef.child('admins')
+  .on("value", snapshot => {
+    vm.admins = snapshot.val();
   });
 
 firebase

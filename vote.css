@@ -97,6 +97,7 @@ h1,h2,h3,h4,h5,h6{
   flex-flow:row wrap;
   padding:10px 0px;
   border-bottom:1px solid var(--cl-main-1);
+  align-items: center;
 }
 .vote-row[data-available="0"]{
   opacity:.5;
@@ -104,9 +105,10 @@ h1,h2,h3,h4,h5,h6{
 
 .vote-row-title{
   width: 50%;
+  word-break: break-all;
 }
 .vote-row-action{
-  width: 25%;
+  width: 180px;
   text-align:right;
 }
 .vote-row-controls{
