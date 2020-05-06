@@ -70,6 +70,10 @@ h1,h2,h3,h4,h5,h6{
   background:var(--btn-color);
   border-color:var(--btn-color);
 }
+.btn-ok[data-count="0"],
+.btn-warn[data-count="0"]{
+  color:#ddd;
+}
 .btn[disabled="disabled"] {
   opacity:0.3;
 }
@@ -104,7 +108,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .vote-row-title{
-  width: 50%;
+  width: calc(100% - 180px - 180px);
   word-break: break-all;
 }
 .vote-row-action{
@@ -112,7 +116,7 @@ h1,h2,h3,h4,h5,h6{
   text-align:right;
 }
 .vote-row-controls{
-  width: 25%;
+  width: 180px;
   text-align:right;
 }
 

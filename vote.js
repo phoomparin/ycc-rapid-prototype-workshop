@@ -1,16 +1,18 @@
 /* global Vue, vm, firebase */
 
-const roomId = new URLSearchParams(location.search).get('roomId') || 'default'
+const roomId = new URLSearchParams(location.search).get('room') || 'default'
 const roomRef = firebase.database().ref('vote/rooms').child(roomId)
 
 vm = new Vue({
   el: "#app",
   data: {
+    roomId: roomId,
     currentUser: null,
     table: {},
     submitting: false,
     userProfiles: {},
     admins: {},
+    roomName: roomId,
   },
   methods: {
     getName(userId) {
@@ -24,6 +26,23 @@ vm = new Vue({
         alert('เข้าสู่ระบบไม่สำเร็จ กรุณาใส่ชื่อด้วย')
         return
       }
+    },
+    async newRoom() {
+      let result = await login()
+      if (!result) {
+        return
+      }
+      const name = prompt('ชื่อห้อง')
+      if (!name) {
+        return
+      }
+      const {key} = await firebase.database().ref('vote/rooms').push({
+        name,
+        admins: {
+          [result.user.uid]: true
+        }
+      })
+      location.search = `?room=${key}`
     },
     async renameMember() {
       const user = firebase.auth().currentUser;
@@ -77,10 +96,11 @@ vm = new Vue({
     toggleRetract(entryId) {
       let entryRef = roomRef.child('entries')
         .child(entryId)
-        .child('retracted')
+        .child('available')
       
-      let isRetracted = entryRef.get() || false    
-      entryRef.set(!isRetracted)
+      entryRef.once('value', value => {
+        entryRef.set(!value.val())
+      })
     },
     async submit() {
       this.submitting = true;
@@ -154,6 +174,11 @@ roomRef.child('entries')
 roomRef.child('admins')
   .on("value", snapshot => {
     vm.admins = snapshot.val();
+  });
+
+roomRef.child('name')
+  .on("value", snapshot => {
+    vm.roomName = snapshot.val();
   });
 
 firebase

@@ -44,9 +44,9 @@
       </svg>
     </div>
     <div class="container" id="app">
-      <section id="vote-table">
+      <section id="vote-table" v-if="roomId !== 'default'">
         <h2 class="cl-main">
-          Vote Table
+          {{roomName}}
         </h2>
         <br />
         <div id="tools-panel">
@@ -74,7 +74,6 @@
             class="vote-row"
             :data-available="entry.available ? '1' : '0'"
             v-for="(entry, entryId) in table"
-            v-if="!entry.retracted"
           >
             <div class="vote-row-title">
               <span class="vote-title-user">{{getName(entry.user)}}</span> -
@@ -100,6 +99,7 @@
                 class="btn btn-ok"
                 @click="setVote(entryId, 'confirm')"
                 :data-state="getUserState(entryId, 'confirm')"
+                :data-count="voteCount(entryId, 'confirm')"
                 :title="voteNames(entryId, 'confirm')"
                 ><span class="vote-count"
                   >{{voteCount(entryId, 'confirm')}}</span
@@ -110,6 +110,7 @@
                 class="btn btn-warn"
                 @click="setVote(entryId, 'concern')"
                 :data-state="getUserState(entryId, 'concern')"
+                :data-count="voteCount(entryId, 'concern')"
                 :title="voteNames(entryId, 'concern')"
                 ><span class="vote-count"
                   >{{voteCount(entryId, 'concern')}}</span
@@ -120,8 +121,12 @@
           </div>
         </div>
       </section>
-    </div>
     <!-- ending: vote-table-wrap -->
+    <section id="new-room">
+      <a @click="newRoom" href="javascript:" class="btn">สร้างห้องใหม่</a>
+    </section>
+      
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
