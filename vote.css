@@ -117,13 +117,17 @@ h1,h2,h3,h4,h5,h6{
   width: calc(100% - 180px - 180px);
   word-break: break-all;
 }
-.vote-row-action{
+.vote-row-action div,
+.vote-row-controls div{
   width: 180px;
-  text-align:right;
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
 }
-.vote-row-controls{
-  width: 180px;
-  text-align:right;
+.vote-row-action div .btn, .vote-row-controls div .btn {
+    width: calc(50% - 2px);
+    box-sizing: border-box;
+    margin: 0px 1px;
 }
 
 .vote-title-user{
@@ -150,14 +154,35 @@ sp{
 
 /*-- Mobile Version --*/
 @media (max-width: 768px) {
+  #header-title {
+    text-align: center;
+    font-size: 2em;
+}
 	#vote-table, #new-room {
     padding: 1rem;
 }
   body {
     margin: 0;
+    background: white;
 }
   .container {
     border: none;
     margin-top: 6em;
 }
+  #tools-panel {
+    top: -4em;
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
+  .btn{
+    background: white;
+    font-size: 1.2em;
+  }
+  .vote-row-title{
+    width:100%;
+  }
+  .vote-row-controls,.vote-row-action{
+    width:50%;
+  }
 }
