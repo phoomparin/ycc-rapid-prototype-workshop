@@ -142,3 +142,22 @@ h1,h2,h3,h4,h5,h6{
 #svg-bg #bg{
   fill:var(--cl-main-2);
 }
+sp{
+  display:block;
+  height:2px;
+  background:#eee;
+}
+
+/*-- Mobile Version --*/
+@media (max-width: 768px) {
+	#vote-table, #new-room {
+    padding: 1rem;
+}
+  body {
+    margin: 0;
+}
+  .container {
+    border: none;
+    margin-top: 6em;
+}
+}
