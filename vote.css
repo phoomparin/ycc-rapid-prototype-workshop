@@ -10,19 +10,23 @@
 
 body {
   background: var(--cl-sea-dark2);
-  padding:var(--cl-sea-light1);
-  color: white;
+  padding:0;
+  color: var(--cl-sea-light1);
   font-family: 'Pridi', sans-serif;
 }
 
 .btn{
+  padding:.4em 1em;
   border: 1px solid white;
   border-radius:5px;
+  display:inlin-block;
 }
 
-.btn, .btn-ok{
-  background:green;
+.btn-ok{
+  background:#2e7d32;
 }
+
+.btn-
 
 #vote-table-wrap {
   display: flex;

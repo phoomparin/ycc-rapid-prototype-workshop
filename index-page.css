@@ -20,16 +20,11 @@ h1{
   font-size: 3em;
 }
 
-h2{
-  color: #ffffff;
-  font-size: 2em;
-}
-
 ul{
   list-style: none;
   text-align: center;
   padding: 0;
-  margin: 0;
+  margin: 20px 0px;
 }
 
 li{
