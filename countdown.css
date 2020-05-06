@@ -1,13 +1,49 @@
 /* CSS file for countdown */
+body{
+  background:#333;
+  color:#fff;
+  margin:0;
+}
+#header{
+  background:#212121;
+  color:#795548;
+}
+#header-brand {
+  font-weight:bold;
+}
+
+#top-panel, #main, #header {
+  padding: 18px 24px;
+}
+
+#top-panel {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
 
 #info {
   font-size: 20px;
+  min-width: 160px;
 }
 
-#info .current-time {
+.time-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 26px;
+}
+
+#info #current-time,
+#info #target-time {
   
 }
 
-#info .target-time {
-  
+#controls button {
+  -webkit-appearance: none;
+  appearance: none;
+  background: white;
+  border: 1px solid grey;
+  font-size: 16px;
+  border-radius: 4px;
 }

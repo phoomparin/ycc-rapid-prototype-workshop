@@ -11,37 +11,42 @@
   </head>
   <body>
     <header id="header">
-      <div id="header-logo">
-        <h2>
-          🕰 Coutdown
-        </h2>
+      <div id="header-brand">
+        <span>
+          🕰 Countdown
+        </span>
       </div>
     </header>
 
     <section id="top-panel">
       <section id="info">
-        <div>
-          <span>Now</span> <span id="current-time">00:00:00</span>
+        <div class="time-display">
+          <div>Now</div>
+          <div id="current-time">00:00:00</div>
         </div>
-        <div>
-          <span>Target</span> <span class="target-time">00:00:00</span>
+        <div class="time-display">
+          <div>Target</div>
+          <div id="target-time">00:00:00</div>
         </div>
       </section>
       <section id="controls">
-        <button class="set-time">
+        <button id="set-time">
           Set Time
         </button>
-        <button class="set-time">
-          Display
+        <button id="extend-time">
+          Extend
         </button>
-        <button class="set-time">
+        <button id="mark-finished">
           Finish
         </button>
       </section>
     </section>
 
     <section id="main">
-      #main
+      <div>
+        <div id="remainning-time"><h1>03:40:20 Remainning</h1>
+        </div>
+      </div>
     </section>
 
     <section id="log">
