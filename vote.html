@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Vote Stroming</title>
+    <title>Vote Storming</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,7 +10,7 @@
     <script src="/vote.js" defer></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="app">
       <section id="vote-table">
         <h2 class="cl-main">
           Vote Table
@@ -19,7 +19,24 @@
         <span class="btn" id="btn-reach">เสนอ</span>
         <br />
         <div id="vote-table-wrap">
-          <div class="vote-row" data-available="false">
+          <div class="vote-row" data-available="1" v-for="(entry, entryId) in table">
+            <div class="vote-row-title">
+              <span class="vote-title-user">{{entry.user}}</span> -
+              <span class="vote-title-detail">
+                {{entry.detail}}
+              </span>
+            </div>
+            <div class="vote-row-action">
+              <span class="btn btn-ok" :data-state="getUserState(entryId, 'confirm')"><span class="vote-count">{{voteCount(entryId, 'confirm')}}</span> รับรอง</span>
+              <span class="btn btn-warn" :data-state="getUserState(entryId, 'concern')"><span class="vote-count">{{voteCount(entryId, 'concern')}}</span> กังวล</span>
+            </div>
+            <div class="vote-row-controls">
+              <span class="btn btn-grey">แก้ไข</span>
+              <span class="btn btn-danger" data-state="0">ถอน</span>
+            </div>
+          </div>
+
+          <div class="vote-row" data-available="1">
             <div class="vote-row-title">
               <span class="vote-title-user">Jabont 1</span> -
               <span class="vote-title-detail">
@@ -28,8 +45,8 @@
               </span>
             </div>
             <div class="vote-row-action">
-              <span class="btn btn-ok" data-state="0">รับรอง</span>
-              <span class="btn btn-warn" data-state="0">กังวล</span>
+              <span class="btn btn-ok" data-state="0"><span class="vote-count">3</span> รับรอง</span>
+              <span class="btn btn-warn" data-state="0"><span class="vote-count">3</span> กังวล</span>
             </div>
             <div class="vote-row-controls">
               <span class="btn btn-grey">แก้ไข</span>
@@ -37,7 +54,7 @@
             </div>
           </div>
 
-          <div class="vote-row" data-available="false">
+          <div class="vote-row" data-available="1">
             <div class="vote-row-title">
               <span class="vote-title-user">Th 1</span> -
               <span class="vote-title-detail">
@@ -46,8 +63,8 @@
               </span>
             </div>
             <div class="vote-row-action">
-              <span class="btn btn-ok" data-state="1">รับรอง</span>
-              <span class="btn btn-warn" data-state="0">กังวล</span>
+              <span class="btn btn-ok" data-state="1"><span class="vote-count">3</span> รับรอง</span>
+              <span class="btn btn-warn" data-state="0"><span class="vote-count">3</span> กังวล</span>
             </div>
             <div class="vote-row-controls">
               <span class="btn btn-grey">แก้ไข</span>
@@ -55,7 +72,7 @@
             </div>
           </div>
 
-          <div class="vote-row" data-available="false">
+          <div class="vote-row" data-available="0">
             <div class="vote-row-title">
               <span class="vote-title-user">Poom 1</span> -
               <span class="vote-title-detail">
@@ -64,8 +81,8 @@
               </span>
             </div>
             <div class="vote-row-action">
-              <span class="btn btn-ok" data-state="0">รับรอง</span>
-              <span class="btn btn-warn" data-state="1">กังวล</span>
+              <span class="btn btn-ok" data-state="0"><span class="vote-count">3</span> รับรอง</span>
+              <span class="btn btn-warn" data-state="1"><span class="vote-count">3</span> กังวล</span>
             </div>
             <div class="vote-row-controls">
               <span class="btn btn-grey">แก้ไข</span>

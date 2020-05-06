@@ -31,11 +31,11 @@ vm = new Vue({
     currentTime: new Date(),
     targetTime: new Date(),
     logs: {},
-    remainingTime: ''
+    remainingTime: '00:00:00'
   },
   methods: {
     format(time) {
-      return formatHMS(time)
+      return formatHMS(time instanceof Date ? time : new Date(time))
     },
     setTime() {
       const answer = prompt('Enter finish time', this.format(this.targetTime))
@@ -58,10 +58,24 @@ vm = new Vue({
       })
     },
     extendTime() {
+      const answer = prompt('How many minutes to extend?', 5)
+      if (!answer) return
       
+      let minutes = Math.max(Number(answer), 1)
+      
+      const targetTime = new Date(this.targetTime.valueOf() + (1000 * 60 * minutes))
+
+      firebase.database().ref('countdown/target').set(targetTime.toJSON())
+      firebase.database().ref('countdown/log').push({
+        time: new Date().toJSON(),
+        message: `Extend by ${minutes} minutes`
+      })
     },
     markAsFinished() {
-      
+      firebase.database().ref('countdown/log').push({
+        time: new Date().toJSON(),
+        message: `The current session has ended.`
+      })
     },
     updateRemainingTime() {
       let diff = this.targetTime - this.currentTime
