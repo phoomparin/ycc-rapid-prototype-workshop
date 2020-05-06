@@ -1,15 +1,17 @@
 /* CSS file for countdown */
 body{
-  background:#333;
+  background:#212121;
   color:#fff;
   margin:0;
 }
 #header{
-  background:#212121;
-  color:#795548;
+  background:#fff;
+  color:#555;
+  opacity:.9;
+  box-shadow:0px 5px 10px #0006;
 }
 #header-brand {
-  font-weight:bold;
+/*   font-weight:bold; */
 }
 
 #top-panel, #main, #header {
@@ -42,8 +44,26 @@ body{
 #controls button {
   -webkit-appearance: none;
   appearance: none;
-  background: white;
+  background: transparent;
+  color: white;
   border: 1px solid grey;
   font-size: 16px;
   border-radius: 4px;
 }
+
+#main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#remaining-time {
+  text-align:center;
+}
+
+#remaining-time div {
+  display:block;
+  font-size: 
+}
+
+
