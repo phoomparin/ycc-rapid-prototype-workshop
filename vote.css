@@ -177,12 +177,21 @@ sp{
 }
   .btn{
     background: white;
-    font-size: 1.2em;
   }
   .vote-row-title{
     width:100%;
+    margin-bottom:.5em;
   }
   .vote-row-controls,.vote-row-action{
     width:50%;
+  }
+  #tools-panel .btn {
+    width: 7em;
+    padding: .3em 0;
+    font-weight: bold;
+}
+  .vote-row-action div,
+.vote-row-controls div{
+  width: 100%;
   }
 }
