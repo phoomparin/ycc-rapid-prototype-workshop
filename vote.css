@@ -69,7 +69,8 @@ h1,h2,h3,h4,h5,h6{
   background:var(--btn-color);
   border-color:var(--btn-color);
 }
-#btn-reach{
+
+#tools-panel{
   position:absolute;
   top:2em;
   right:2em;
@@ -98,14 +99,14 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .vote-row-title{
-  width: 60%;
+  width: 50%;
 }
 .vote-row-action{
-  width: 20%;
+  width: 25%;
   text-align:right;
 }
 .vote-row-controls{
-  width: 20%;
+  width: 25%;
   text-align:right;
 }
 

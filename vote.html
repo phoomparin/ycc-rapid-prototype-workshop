@@ -16,10 +16,13 @@
           Vote Table
         </h2>
         <br>
-        <span class="btn" id="btn-reach">เสนอ</span>
+        <div id="tools-panel">
+        <span class="btn" id="btn-reach" @click="submit">🙋‍♀️ เสนอ</span>
+        <span class="btn" id="btn-member" >😀 สมาชิก</span>
+        </div>
         <br />
         <div id="vote-table-wrap">
-          <div class="vote-row" data-available="1" v-for="(entry, entryId) in table">
+          <div class="vote-row" :data-available="entry.available ? '1' : '0'" v-for="(entry, entryId) in table">
             <div class="vote-row-title">
               <span class="vote-title-user">{{entry.user}}</span> -
               <span class="vote-title-detail">
@@ -27,72 +30,40 @@
               </span>
             </div>
             <div class="vote-row-action">
-              <span class="btn btn-ok" :data-state="getUserState(entryId, 'confirm')"><span class="vote-count">{{voteCount(entryId, 'confirm')}}</span> รับรอง</span>
-              <span class="btn btn-warn" :data-state="getUserState(entryId, 'concern')"><span class="vote-count">{{voteCount(entryId, 'concern')}}</span> กังวล</span>
+              <span class="btn btn-ok" :data-state="getUserState(entryId, 'confirm')"><span class="vote-count">{{voteCount(entryId, 'confirm')}}</span> 👌 รับรอง</span>
+              <span class="btn btn-warn" :data-state="getUserState(entryId, 'concern')"><span class="vote-count">{{voteCount(entryId, 'concern')}}</span> 🤔 กังวล</span>
             </div>
             <div class="vote-row-controls">
-              <span class="btn btn-grey">แก้ไข</span>
-              <span class="btn btn-danger" data-state="0">ถอน</span>
-            </div>
-          </div>
-
-          <div class="vote-row" data-available="1">
-            <div class="vote-row-title">
-              <span class="vote-title-user">Jabont 1</span> -
-              <span class="vote-title-detail">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                enim magna, pellentesque non
-              </span>
-            </div>
-            <div class="vote-row-action">
-              <span class="btn btn-ok" data-state="0"><span class="vote-count">3</span> รับรอง</span>
-              <span class="btn btn-warn" data-state="0"><span class="vote-count">3</span> กังวล</span>
-            </div>
-            <div class="vote-row-controls">
-              <span class="btn btn-grey">แก้ไข</span>
-              <span class="btn btn-danger" data-state="0">ถอน</span>
-            </div>
-          </div>
-
-          <div class="vote-row" data-available="1">
-            <div class="vote-row-title">
-              <span class="vote-title-user">Th 1</span> -
-              <span class="vote-title-detail">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                enim magna, pellentesque non
-              </span>
-            </div>
-            <div class="vote-row-action">
-              <span class="btn btn-ok" data-state="1"><span class="vote-count">3</span> รับรอง</span>
-              <span class="btn btn-warn" data-state="0"><span class="vote-count">3</span> กังวล</span>
-            </div>
-            <div class="vote-row-controls">
-              <span class="btn btn-grey">แก้ไข</span>
-              <span class="btn btn-danger" data-state="0">ถอน</span>
-            </div>
-          </div>
-
-          <div class="vote-row" data-available="0">
-            <div class="vote-row-title">
-              <span class="vote-title-user">Poom 1</span> -
-              <span class="vote-title-detail">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                enim magna, pellentesque non
-              </span>
-            </div>
-            <div class="vote-row-action">
-              <span class="btn btn-ok" data-state="0"><span class="vote-count">3</span> รับรอง</span>
-              <span class="btn btn-warn" data-state="1"><span class="vote-count">3</span> กังวล</span>
-            </div>
-            <div class="vote-row-controls">
-              <span class="btn btn-grey">แก้ไข</span>
-              <span class="btn btn-danger" data-state="1">ถอน</span>
+              <span class="btn btn-grey">📝 แก้ไข</span>
+              <span class="btn btn-danger" data-state="0">🙅‍♀️ ถอน</span>
             </div>
           </div>
         </div>
       </section>
     </div>
     <!-- ending: vote-table-wrap -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAsUBlRJxl4NYGRofI-o3J0UsYTHG8-F18",
+        authDomain: "ycc-playground.firebaseapp.com",
+        databaseURL: "https://ycc-playground.firebaseio.com",
+        projectId: "ycc-playground",
+        storageBucket: "ycc-playground.appspot.com",
+        messagingSenderId: "265116780865",
+        appId: "1:265116780865:web:95d86f08a9da0e8534b9c0"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
 
     <!-- include the Glitch button to show what the webpage is about and
           to make it easier for folks to view source and remix -->

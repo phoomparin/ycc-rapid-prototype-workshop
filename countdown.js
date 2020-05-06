@@ -74,13 +74,16 @@ vm = new Vue({
     markAsFinished() {
       firebase.database().ref('countdown/log').push({
         time: new Date().toJSON(),
-        message: `The current session has ended.`
+        message: `Marked this session as finished.`
       })
     },
     updateRemainingTime() {
       let diff = this.targetTime - this.currentTime
       
       this.remainingTime = getRemaining(diff)
+    },
+    reverseOrder(obj) {
+      return Object.values(obj).sort((a, b) => a.time - b.time)
     }
   }
 });
@@ -89,7 +92,7 @@ firebase.database().ref('countdown/target').on('value', (snapshot) => {
   vm.targetTime = new Date(snapshot.val())
 })
 
-firebase.database().ref('countdown/log').on('value', (snapshot) => {
+firebase.database().ref('countdown/log').orderByChild('time').on('value', (snapshot) => {
   vm.logs = snapshot.val()
 })
 
