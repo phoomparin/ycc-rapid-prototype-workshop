@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Pridi&display=swap');
+:root{
+  --cl-sea:#00BCD4;
+  --cl-sea-light1:#E0F7FA;
+  --cl-sea-light2:#4DD0E1;
+  --cl-sea-dark1:#00ACC1;
+  --cl-sea-dark2:#00838F;
+}
+
+
+body {
+  background: var(--cl-sea-dark2);
+  padding:var(--cl-sea-light1);
+  color: white;
+  font-family: 'Pridi', sans-serif;
+}
+
+.btn{
+  border: 1px solid white;
+  border-radius:5px;
+}
+
+.btn, .btn-ok{
+  background:green;
+}
+
+#vote-table-wrap {
+  display: flex;
+}

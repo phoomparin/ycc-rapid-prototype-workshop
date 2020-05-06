@@ -9,12 +9,13 @@ body{
   color:#555;
   opacity:.9;
   box-shadow:0px 5px 10px #0006;
+  padding: 4px 15px;
 }
 #header-brand {
 /*   font-weight:bold; */
 }
 
-#top-panel, #main, #header {
+section {
   padding: 18px 24px;
 }
 
@@ -51,19 +52,28 @@ body{
   border-radius: 4px;
 }
 
-#main {
+#remaining-time-container {
   display: flex;
+  text-align: center;
+  font-size: 28px;
   align-items: center;
   justify-content: center;
 }
 
-#remaining-time {
-  text-align:center;
+#remaining-time-display {
+  margin-right: 10px;
+  font-weight: bold;
 }
 
-#remaining-time div {
-  display:block;
-  font-size: 
+#remaining-time-label {
+  font-size: 0.8em;
 }
 
+.log{
+  display: flex;
+  
+}
 
+#current-time-log{
+  display: flex;
+}
