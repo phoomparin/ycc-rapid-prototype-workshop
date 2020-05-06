@@ -37,7 +37,7 @@
           <button id="extend-time" @click="extendTime">
             Extend
           </button>
-          <button id="mark-finished" @click="markAsFinish">
+          <button id="mark-finished" @click="markAsFinished">
             Finish
           </button>
         </section>
@@ -57,15 +57,9 @@
           Log
         </div>
 
-        <div id="log-screen">
-          <div id="log-set">
-            Set timer to 22:00
-          </div>
-          <div id="log-extend">
-            [21:40:00] Extend 10 minute = 21:00
-          </div>
-          <div id="log-finish">
-            [22:50:00] Finish
+        <div id="log-screen"> 
+          <div v-for="log in logs || {}">
+            [{{ format(log.time) }}] {{ log.message }}
           </div>
         </div>
       </section>
