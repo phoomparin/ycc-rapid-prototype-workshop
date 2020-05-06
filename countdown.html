@@ -58,7 +58,7 @@
         </div>
 
         <div id="log-screen"> 
-          <div v-for="log in reverseOrder(logs || {})">
+          <div v-for="log in logs || {}">
             [{{ format(log.time) }}] {{ log.message }}
           </div>
         </div>

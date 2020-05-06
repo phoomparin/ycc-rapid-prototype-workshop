@@ -21,7 +21,13 @@ function getRemaining(diff) {
   
   let SS = Math.floor(diff)
   
+  if (HH < 0) return '00:00:00'
+  
   return `${pad(HH)}:${pad(MM)}:${pad(SS)}`
+}
+
+function reverseOrder(obj) {
+  return Object.values(obj).sort((a, b) => new Date(b.time) - new Date(a.time))
 }
 
 
@@ -81,9 +87,6 @@ vm = new Vue({
       let diff = this.targetTime - this.currentTime
       
       this.remainingTime = getRemaining(diff)
-    },
-    reverseOrder(obj) {
-      return Object.values(obj).sort((a, b) => a.time - b.time)
     }
   }
 });
@@ -93,7 +96,7 @@ firebase.database().ref('countdown/target').on('value', (snapshot) => {
 })
 
 firebase.database().ref('countdown/log').orderByChild('time').on('value', (snapshot) => {
-  vm.logs = snapshot.val()
+  vm.logs = reverseOrder(snapshot.val())
 })
 
 window.addEventListener("DOMContentLoaded", () => {
