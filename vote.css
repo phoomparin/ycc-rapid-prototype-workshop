@@ -21,11 +21,13 @@ body {
 /*   font-family: 'Itim', sans-serif; */
 }
 .container{
+  position:relative;
   width:100%;
   max-width:1000px;
   min-width:320px;
   margin:auto;
   border:2px solid var(--cl-main-1);
+  background:white;
 }
 h1,h2,h3,h4,h5,h6{
   padding:0;
@@ -85,7 +87,11 @@ h1,h2,h3,h4,h5,h6{
 }
 
 #vote-table{
-  background:white;
+  padding:2em;
+  position:relative;
+}
+
+#new-room{
   padding:2em;
   position:relative;
 }

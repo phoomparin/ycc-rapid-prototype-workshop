@@ -58,7 +58,7 @@
             >🙋‍♀️ เสนอ</span
           >
           <span class="btn" id="btn-member" @click="login" v-if="!currentUser"
-            >😀 เข้าสู่ระบบ</span
+            >😀 ตั้งชื่อ</span
           >
           <span
             class="btn"
@@ -123,7 +123,21 @@
       </section>
     <!-- ending: vote-table-wrap -->
     <section id="new-room">
-      <a @click="newRoom" href="javascript:" class="btn">สร้างห้องใหม่</a>
+      <h2 class="cl-main">
+        Vote Storming 🌪
+      </h2>
+     <b>มาโหวตกันเถอะ!</b>
+        <p>
+          ร่วมเสนอความเห็นและให้การรับรอง เพื่อว่าข้อเสนอไหนที่คนชื่นชอบมากที่สุด 
+      </p>
+        <ul>
+          <li>สร้างห้องใหม่ หรือ เข้าร่วมห้องที่มีอยู่ผ่าน url</li>
+          <li>กำหนดชื่อเพื่อให้ทุกคนรับฟังเยงของคุณ</li>
+          <li>กด 👌 ในหัวข้อที่ชอบ หรือ 🤔 ในหัวข้อที่ยังกังวล</li>
+          <li>ข้อเสนอไหนไม่เอาแล้ว สามารถถอนออกได้</li>
+      </ul>
+      <br>
+      <span @click="newRoom" href="javascript:" class="btn">🎲 &nbsp;สร้างห้องใหม่</span>
     </section>
       
     </div>
