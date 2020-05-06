@@ -1,19 +1,36 @@
-console.log("hi");
+/* global Vue, vm, firebase */
 
-firebase.database().ref('countdown/target').on('value', () => {
+let pad = num => (num < 10 ? "0" + num : num);
+
+function formatHMS(now) {
+  let HH = pad(now.getHours());
+  let MM = pad(now.getMinutes());
+  let SS = pad(now.getSeconds());
+  
+  return `${HH}:${MM}:${SS}`;
+}
+
+vm = new Vue({
+  el: "#app",
+  data: {
+    currentTime: "...",
+    targetTime: "..."
+  },
+  methods: {
+    format(time) {
+      return formatHMS(time)
+    }
+  }
+});
+
+firebase.database().ref('countdown/target').on('value', (snapshot) => {
+  vm.targetTime = new Date(snapshot.val())
 })
 
-window.addEventListener('DOMContentLoaded', () => {
-  let currentTime = document.querySelector('#current-time')
-  
+window.addEventListener("DOMContentLoaded", () => {
   let timer = setInterval(() => {
-    const now = new Date()
-    
-    let pad = num => num < 10 ? '0' + num : num
-    let HH = pad(now.getHours())
-    let MM = pad(now.getMinutes())
-    let SS = pad(now.getSeconds())
-  
-    currentTime.textContent = `${HH}:${MM}:${SS}`
-  }, 1000)
-})
+    const now = new Date();
+
+    vm.currentTime = new Date();
+  }, 1000);
+});

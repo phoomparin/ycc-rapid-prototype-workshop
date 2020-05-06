@@ -5,8 +5,8 @@
   --cl-main-1:hsl(var(--hue-main),100%,90%);
   --cl-main-2:hsl(var(--hue-main),100%,70%);
   --cl-main-3:hsl(var(--hue-main),100%,50%);
-  --cl-main-4:hsl(var(--hue-main),100%,30%);
-  --cl-main-5:hsl(var(--hue-main),100%,20%);
+  --cl-main-4:hsl(var(--hue-main),80%,25%);
+  --cl-main-5:hsl(var(--hue-main),80%,15%);
   --hue-sea:185;
   --hue-warn:185;
   --hue-ok:185;
@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,h6{
 .btn{
   color:#555;
   padding:.2em .7em;
-  border: 1px solid;
+  border: 2px solid;
   display:inline-block;
   cursor:pointer;
   background:20;
@@ -43,6 +43,10 @@ h1,h2,h3,h4,h5,h6{
   color:var(--cl-main-3);
 }
 
+.btn:hover{
+  --btn-color:red;
+  color:var(--btn-color);
+}
 .btn-ok{
   
 }
@@ -69,8 +73,27 @@ h1,h2,h3,h4,h5,h6{
   flex-flow:row wrap;
 }
 
-.vote-table-row{
+.vote-row{
   width:100%;
   display: flex;
   flex-flow:row wrap;
+  padding:10px 0px;
+  border-bottom:1px solid var(--cl-main-1);
+}
+
+.vote-row-title{
+  width: 60%;
+}
+.vote-row-action{
+  width: 20%;
+  text-align:right;
+}
+.vote-row-controls{
+  width: 20%;
+  text-align:right;
+}
+
+.vote-title-user{
+  color:var(--cl-main-2);
+  font-weight:bold;
 }
