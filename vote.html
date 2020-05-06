@@ -13,10 +13,25 @@
     <div id="svg-bg">
       <svg viewbox="0 0 100 20">
         <path id="bg" d="M0 0 
-                         L20
-                         
+                         S15,18 40,10 
+                         S70,5 100,20 
+                         L100,0
                          Z
                          ">
+          <animate attributeName="d" values="M0 0 
+                         S15,18 40,10 
+                         S70,5 100,20 
+                         L100,0
+                         Z;M0 0 
+                         S20,5 40,10 
+                         S70,5 100,20 
+                         L100,0
+                         Z;M0 0 
+                         S15,18 40,10 
+                         S70,5 100,20 
+                         L100,0
+                         Z;
+                                             " dur="3s" repeatcount="indefinite" />
         </path>
       </svg>
     </div>
@@ -28,24 +43,27 @@
         <br>
         <div id="tools-panel">
         <span class="btn" id="btn-reach" @click="submit" :disabled="submitting">🙋‍♀️ เสนอ</span>
-        <span class="btn" id="btn-member" @click="login">😀 เข้าสู่ระบบ</span>
+        <span class="btn" id="btn-member" @click="login" v-if="!currentUser">😀 เข้าสู่ระบบ</span>
+        <span class="btn" id="btn-rename-member" @click="renameMember" v-if="currentUser">💬 เปลี่ยนชื่อ</span>
+
+          
         </div>
         <br />
         <div id="vote-table-wrap">
           <div class="vote-row" :data-available="entry.available ? '1' : '0'" v-for="(entry, entryId) in table">
             <div class="vote-row-title">
-              <span class="vote-title-user">{{entry.user}}</span> -
+              <span class="vote-title-user">{{getName(entry.user)}}</span> -
               <span class="vote-title-detail">
                 {{entry.detail}}
               </span>
             </div>
             <div class="vote-row-action">
-              <span class="btn btn-ok" :data-state="getUserState(entryId, 'confirm')"><span class="vote-count">{{voteCount(entryId, 'confirm')}}</span> 👌 รับรอง</span>
-              <span class="btn btn-warn" :data-state="getUserState(entryId, 'concern')"><span class="vote-count">{{voteCount(entryId, 'concern')}}</span> 🤔 กังวล</span>
+              <span class="btn btn-ok" @click="setVote(entryId, 'confirm')" :data-state="getUserState(entryId, 'confirm')"><span class="vote-count">{{voteCount(entryId, 'confirm')}}</span> 👌 รับรอง</span>
+              <span class="btn btn-warn" @click="setVote(entryId, 'concern')" :data-state="getUserState(entryId, 'concern')"><span class="vote-count">{{voteCount(entryId, 'concern')}}</span> 🤔 กังวล</span>
             </div>
-            <div class="vote-row-controls">
-              <span class="btn btn-grey">📝 แก้ไข</span>
-              <span class="btn btn-danger" data-state="0">🙅‍♀️ ถอน</span>
+            <div class="vote-row-controls" v-if="isMine(entryId) || isAdmin()">
+              <span class="btn btn-grey" @click="edit(entryId)">📝 แก้ไข</span>
+              <span class="btn btn-danger" @click="retract(entryId)" data-state="0">🙅‍♀️ ถอน</span>
             </div>
           </div>
         </div>
