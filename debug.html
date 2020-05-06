@@ -1,77 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Countdown</title>
+    <title>Debug</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/countdown.css" />
-    <script src="/countdown.js" defer></script>
+
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
   </head>
   <body>
-    <header id="header">
-      <div id="header-brand">
-        <span>
-          ⏱ Time Keeper
-        </span>
-      </div>
-    </header>
-
-    <section id="top-panel">
-      <section id="info">
-        <div class="time-display">
-          <div>Now</div>
-          <div id="current-time">00:00:00</div>
-        </div>
-        <div class="time-display">
-          <div>Target</div>
-          <div id="target-time">00:00:00</div>
-        </div>
-      </section>
-      <section id="controls">
-        <button id="set-time">
-          Set Time
-        </button>
-        <button id="extend-time">
-          Extend
-        </button>
-        <button id="mark-finished">
-          Finish
-        </button>
-      </section>
-    </section>
-
-    <section id="main">
-      <div>
-        <div id="remaining-time-container">
-          <div id="remaining-time-display">03:40:20</div>
-          <div id="remaining-time-label">Remaining</div>
-        </div>
-      </div>
-    </section>
-
+    <div class="middlepage">
+      <h1>Debug</h1>
+      <pre id="debugMessage"></pre>
+    </div>
     
-    <section id="log">
-      
-      <div id="log-header">
-        Log
-      </div>
-
-      <div id="log-screen">
-        <div id="log-set"> 
-          Set timer to 22:00 
-        </div> 
-      <div id="log-extend">
-        [21:40:00] Extend 10 minute = 21:00 
-      </div>
-      <div id="log-finish">
-        [22:50:00] Finish
-      </div>
-      </div>
-      
-    </section>
-
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -93,11 +39,17 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
     </script>
-
-
+    
+    <script>
+      firebase.database().ref('/').on('value', snapshot => {
+        debugMessage.textContent = JSON.stringify(snapshot.val(), null, 2)
+      })
+    </script>
+    
     <!-- include the Glitch button to show what the webpage is about and
           to make it easier for folks to view source and remix -->
     <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
     <script src="https://button.glitch.me/button.js"></script>
   </body>
 </html>
+

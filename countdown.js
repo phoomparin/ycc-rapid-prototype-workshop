@@ -1,5 +1,8 @@
 console.log("hi");
 
+firebase.database().ref('countdown/target').on('value', () => {
+})
+
 window.addEventListener('DOMContentLoaded', () => {
   let currentTime = document.querySelector('#current-time')
   

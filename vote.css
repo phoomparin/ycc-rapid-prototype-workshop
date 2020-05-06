@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Pridi&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap'); */
 :root{
-  --cl-sea:#00BCD4;
-  --cl-sea-light1:#E0F7FA;
-  --cl-sea-light2:#4DD0E1;
-  --cl-sea-dark1:#00ACC1;
-  --cl-sea-dark2:#00838F;
+  --hue-main:330;
+  --cl-main:hsl(var(--hue-main),100%,50%);
+  --cl-main-1:hsl(var(--hue-main),100%,90%);
+  --cl-main-2:hsl(var(--hue-main),100%,70%);
+  --cl-main-3:hsl(var(--hue-main),100%,50%);
+  --cl-main-4:hsl(var(--hue-main),100%,30%);
+  --cl-main-5:hsl(var(--hue-main),100%,20%);
   --hue-sea:185;
   --hue-warn:185;
   --hue-ok:185;
@@ -14,36 +16,52 @@
 
 
 body {
-  background: var(--cl-sea-dark2);
+  background: var(--cl-main-1);
   padding:0;
-  color: var(--cl-sea-light1);
-  font-family: 'Pridi', sans-serif;
+  color: #555;
+/*   font-family: 'Itim', sans-serif; */
 }
-
+.container{
+  width:100%;
+  max-width:1000px;
+  min-width:320px;
+  margin:auto;
+}
+h1,h2,h3,h4,h5,h6{
+  padding:0;
+  margin:0;
+}
 .btn{
+  color:#555;
   padding:.2em .7em;
-  border: 2px solid white;
-  border-radius:5px;
+  border: 1px solid;
   display:inline-block;
   cursor:pointer;
   background:20;
-  color:white;
+}
+.cl-main{
+  color:var(--cl-main-3);
 }
 
 .btn-ok{
-  background:hsl(var(--hue-ok),80%,30%);
+  
 }
 
 .btn-warn{
-  background:hsl(var(--hue-warn),80%,30%);
+  
 }
 
 .btn-grey{
-  background:hsl(var(--hue-grey),80%,30%);
+  
 }
 
 .btn-danger{
-  background:hsl(var(--hue-danger),80%,30%);
+  
+}
+
+#vote-table{
+  background:white;
+  padding:2em;
 }
 
 #vote-table-wrap {
