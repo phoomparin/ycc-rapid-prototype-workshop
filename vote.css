@@ -5,6 +5,11 @@
   --cl-sea-light2:#4DD0E1;
   --cl-sea-dark1:#00ACC1;
   --cl-sea-dark2:#00838F;
+  --hue-sea:185;
+  --hue-warn:185;
+  --hue-ok:185;
+  --hue-danger:185;
+  --hue-grey:185;
 }
 
 
@@ -16,20 +21,38 @@ body {
 }
 
 .btn{
-  padding:.4em 1em;
-  border: 1px solid white;
+  padding:.2em .7em;
+  border: 2px solid white;
   border-radius:5px;
-  display:inlin-block;
+  display:inline-block;
+  cursor:pointer;
+  background:20;
+  color:white;
 }
 
 .btn-ok{
-  background:#2e7d32;
+  background:hsl(var(--hue-ok),80%,30%);
 }
 
 .btn-warn{
-  background:#ffeb3b;
+  background:hsl(var(--hue-warn),80%,30%);
+}
+
+.btn-grey{
+  background:hsl(var(--hue-grey),80%,30%);
+}
+
+.btn-danger{
+  background:hsl(var(--hue-danger),80%,30%);
 }
 
 #vote-table-wrap {
   display: flex;
+  flex-flow:row wrap;
+}
+
+.vote-table-row{
+  width:100%;
+  display: flex;
+  flex-flow:row wrap;
 }
