@@ -37,6 +37,9 @@ vm = new Vue({
     targetTime: new Date(),
     logs: {},
     remainingTime: '00:00:00',
+    checkpointMinutes: [0, 1, 3, 5, 10, 20],
+    flashDuration: 10000, // ms
+    isFlashTimer: false,
   },
   methods: {
     format(time) {
@@ -96,9 +99,18 @@ vm = new Vue({
       this.remainingTime = getRemaining(diff)
     },
   },
-  computed: {
-    flashTimer() {
-      return false
+  watch: {
+    remainingTime(newVal) {
+      const remainingMins = parseInt(newVal.split(':')[1])
+      const remainingSecs = parseInt(newVal.split(':')[2])
+      const isCheckpointMinute =
+        this.checkpointMinutes.indexOf(remainingMins) > 0 && remainingSecs === 0
+      if (isCheckpointMinute) {
+        this.isFlashTimer = true
+        setTimeout(() => {
+          this.isFlashTimer = false
+        }, this.flashDuration)
+      }
     },
   },
 })
