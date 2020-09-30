@@ -100,8 +100,8 @@ section {
 }
 
 .flash-anim {
-  -webkit-animation: flash linear 0.5s infinite;
-  animation: flash linear 0.5s infinite;
+  -webkit-animation: flash linear 0.3s infinite;
+  animation: flash linear 0.3s infinite;
 }
 
 @-webkit-keyframes flash {
