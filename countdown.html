@@ -1,95 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Countdown</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/countdown.css" />
-    <script src="/countdown.js" defer></script>
-  </head>
-  <body>
-    <div id="app">
-      <header id="header">
-        <div id="header-brand">
-          <span>
-            ⏱ Time Keeper
-          </span>
+
+<head>
+  <title>Countdown</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/countdown.css" />
+  <script src="/countdown.js" defer></script>
+</head>
+
+<body>
+  <div id="app">
+    <header id="header">
+      <div id="header-brand">
+        <span>
+          ⏱ Time Keeper
+        </span>
+      </div>
+    </header>
+
+    <section id="top-panel">
+      <section id="info">
+        <div class="time-display">
+          <div>Now</div>
+          <div id="current-time">{{ format(currentTime) }}</div>
         </div>
-      </header>
-
-      <section id="top-panel">
-        <section id="info">
-          <div class="time-display">
-            <div>Now</div>
-            <div id="current-time">{{ format(currentTime) }}</div>
-          </div>
-          <div class="time-display">
-            <div>Target</div>
-            <div id="target-time">{{ format(targetTime) }}</div>
-          </div>
-        </section>
-        <section id="controls">
-          <button id="set-time" @click="setTime">
-            Set Time
-          </button>
-          <button id="extend-time" @click="extendTime">
-            Extend
-          </button>
-          <button id="mark-finished" @click="markAsFinished">
-            Finish
-          </button>
-        </section>
-      </section>
-
-      <section id="main">
-        <div>
-          <div id="remaining-time-container">
-            <div id="remaining-time-display">{{remainingTime}}</div>
-            <div id="remaining-time-label">Remaining</div>
-          </div>
+        <div class="time-display">
+          <div>Target</div>
+          <div id="target-time">{{ format(targetTime) }}</div>
         </div>
       </section>
-
-      <section id="log">
-        <div id="log-header">
-          Log
-        </div>
-
-        <div id="log-screen"> 
-          <div v-for="log in logs || {}">
-            [{{ format(log.time) }}] {{ log.message }}
-          </div>
-        </div>
+      <section id="controls">
+        <button id="set-time" @click="setTime">
+          Set Time
+        </button>
+        <button id="extend-time" @click="extendTime">
+          Extend
+        </button>
+        <button id="mark-finished" @click="markAsFinished">
+          Finish
+        </button>
       </section>
-    </div>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <section id="main">
+      <div>
+        <div id="remaining-time-container">
+          <div id="remaining-time-display" :class="{'flash-anim': isFlashTimer}">{{remainingTime}}</div>
+          <div id="remaining-time-label">Remaining</div>
+        </div>
+      </div>
+    </section>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
+    <section id="log">
+      <div id="log-header">
+        Log
+      </div>
 
-    <script>
-      // Your web app's Firebase configuration
-      var firebaseConfig = {
-        apiKey: "AIzaSyAsUBlRJxl4NYGRofI-o3J0UsYTHG8-F18",
-        authDomain: "ycc-playground.firebaseapp.com",
-        databaseURL: "https://ycc-playground.firebaseio.com",
-        projectId: "ycc-playground",
-        storageBucket: "ycc-playground.appspot.com",
-        messagingSenderId: "265116780865",
-        appId: "1:265116780865:web:95d86f08a9da0e8534b9c0"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-    </script>
+      <div id="log-screen">
+        <div v-for="log in logs || {}">
+          [{{ format(log.time) }}] {{ log.message }}
+        </div>
+      </div>
+    </section>
+  </div>
 
-    <!-- include the Glitch button to show what the webpage is about and
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAsUBlRJxl4NYGRofI-o3J0UsYTHG8-F18",
+      authDomain: "ycc-playground.firebaseapp.com",
+      databaseURL: "https://ycc-playground.firebaseio.com",
+      projectId: "ycc-playground",
+      storageBucket: "ycc-playground.appspot.com",
+      messagingSenderId: "265116780865",
+      appId: "1:265116780865:web:95d86f08a9da0e8534b9c0"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- include the Glitch button to show what the webpage is about and
           to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js"></script>
-  </body>
+  <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+  <script src="https://button.glitch.me/button.js"></script>
+</body>
+
 </html>

@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
 /* CSS file for countdown */
-body{
-  background:#2c3e51;
-  color:#fff;
-  margin:0;
+
+body {
+  background: #2c3e51;
+  color: #fff;
+  margin: 0;
   font-family: 'Roboto', sans-serif;
 }
 
-#header{
-  background:#fff;
-  color:#555;
-  opacity:.9;
-  box-shadow:0px 5px 10px #0006;
+#header {
+  background: #fff;
+  color: #555;
+  opacity: .9;
+  box-shadow: 0px 5px 10px #0006;
   padding: 4px 15px;
   font-weight: bold;
 }
@@ -74,19 +74,19 @@ section {
   margin-left: 5px;
 }
 
-#log{
+#log {
   display: flex;
   flex-direction: column;
 }
 
-#log-header{
+#log-header {
   display: flex;
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 14px;
-  
 }
-#log-screen{
+
+#log-screen {
   display: flex;
   flex-direction: column;
   left: 10px;
@@ -95,6 +95,35 @@ section {
   line-height: 26px;
 }
 
-#current-time-log{
+#current-time-log {
   display: flex;
+}
+
+.flash-anim {
+  -webkit-animation: flash linear 0.3s infinite;
+  animation: flash linear 0.3s infinite;
+}
+
+@-webkit-keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
